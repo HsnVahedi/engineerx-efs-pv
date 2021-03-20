@@ -18,7 +18,6 @@ pipeline {
         CLUSTER_NAME = "engineerx"
         MEDIA_EFS_ID = "${params.MEDIA_EFS_ID}"
         STATIC_EFS_ID = "${params.STATIC_EFS_ID}"
-        // DOCKERHUB_CRED = credentials('dockerhub-repo')  
     }
     stages {
         stage('Providing Access Keys') {
@@ -42,11 +41,9 @@ pipeline {
             steps {
                 script {
                     if (env.ACTION == 'destroy') {
-                        sh('terraform refresh --var static_efs_id=$STATIC_EFS_ID --var media_efs_id=$MEDIA_EFS_ID')
                         sh('terraform destroy --var static_efs_id=$STATIC_EFS_ID --var media_efs_id=$MEDIA_EFS_ID --auto-approve')
                     }
                     if (env.ACTION == 'apply') {
-                        sh('terraform refresh --var static_efs_id=$STATIC_EFS_ID --var media_efs_id=$MEDIA_EFS_ID')
                         sh('terraform apply --var static_efs_id=$STATIC_EFS_ID --var media_efs_id=$MEDIA_EFS_ID --auto-approve')
                     }
                     if (env.ACTION == 'create') {
