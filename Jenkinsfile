@@ -9,13 +9,15 @@ pipeline {
         string(name: 'ACTION', defaultValue: 'apply')
         string(name: 'MEDIA_EFS_ID')
         string(name: 'STATIC_EFS_ID')
+        string(name: 'CLUSTER_NAME', defaultValue: 'engineerx')
+        string(name: 'REGION', defaultValue: 'us-east-2')
     }
     environment {
         ACCESS_KEY_ID = credentials('aws-access-key-id')
         SECRET_KEY = credentials('aws-secret-key')
         ACTION = "${params.ACTION}"
-        REGION = "us-east-2"
-        CLUSTER_NAME = "engineerx"
+        REGION = "${params.REGION}"
+        CLUSTER_NAME = "${params.CLUSTER_NAME}"
         MEDIA_EFS_ID = "${params.MEDIA_EFS_ID}"
         STATIC_EFS_ID = "${params.STATIC_EFS_ID}"
     }
